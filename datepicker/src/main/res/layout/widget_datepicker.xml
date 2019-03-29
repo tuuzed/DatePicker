@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:orientation="horizontal">
+
+    <com.tuuzed.androidx.datepicker.internal.WheelView
+            android:id="@+id/wv_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            app:wv_textSize="13sp"
+            app:wv_selectColor="@android:color/primary_text_light"
+            app:wv_color="@android:color/tertiary_text_light"/>
+
+    <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:text="@string/year"
+            android:textSize="12sp"
+            android:textColor="@android:color/secondary_text_light"
+            android:layout_height="wrap_content"/>
+
+    <com.tuuzed.androidx.datepicker.internal.WheelView
+            android:id="@+id/wv_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            app:wv_textSize="13sp"
+            app:wv_selectColor="@android:color/primary_text_light"
+            app:wv_color="@android:color/tertiary_text_light"/>
+
+
+    <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:text="@string/month"
+            android:textSize="12sp"
+            android:textColor="@android:color/secondary_text_light"
+            android:layout_height="wrap_content"/>
+
+    <com.tuuzed.androidx.datepicker.internal.WheelView
+            android:id="@+id/wv_day"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            app:wv_textSize="13sp"
+            app:wv_selectColor="@android:color/primary_text_light"
+            app:wv_color="@android:color/tertiary_text_light"/>
+
+
+    <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:text="@string/day"
+            android:textSize="12sp"
+            android:textColor="@android:color/secondary_text_light"
+            android:layout_height="wrap_content"/>
+
+    <com.tuuzed.androidx.datepicker.internal.WheelView
+            android:id="@+id/wv_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            app:wv_textSize="13sp"
+            app:wv_selectColor="@android:color/primary_text_light"
+            app:wv_color="@android:color/tertiary_text_light"/>
+
+
+    <TextView
+            android:id="@+id/tv_hour"
+            android:layout_width="wrap_content"
+            android:text="@string/hour"
+            android:textSize="12sp"
+            android:textColor="@android:color/secondary_text_light"
+            android:layout_height="wrap_content"/>
+
+    <com.tuuzed.androidx.datepicker.internal.WheelView
+            android:id="@+id/wv_minute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            app:wv_textSize="13sp"
+            app:wv_selectColor="@android:color/primary_text_light"
+            app:wv_color="@android:color/tertiary_text_light"/>
+
+    <TextView
+            android:id="@+id/tv_minute"
+            android:layout_width="wrap_content"
+            android:text="@string/minute"
+            android:textSize="12sp"
+            android:textColor="@android:color/secondary_text_light"
+            android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

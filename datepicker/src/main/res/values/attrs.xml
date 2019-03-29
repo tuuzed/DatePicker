@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WheelView">
+        <attr format="string|reference" name="wv_label"/>
+        <attr format="boolean" name="wv_cyclic"/>
+        <attr format="color|reference" name="wv_color"/>
+        <attr format="color|reference" name="wv_selectColor"/>
+        <attr format="dimension|reference" name="wv_textSize"/>
+        <attr format="integer|reference" name="wv_visibleCount"/>
+        <attr format="reference" name="wv_topShadow"/>
+        <attr format="reference" name="wv_bottomShadow"/>
+        <attr format="reference" name="wv_selectedBg"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="DatePicker">
+        <attr format="integer" name="dp_minYear"/>
+        <attr format="integer" name="dp_maxYear"/>
+        <attr format="enum" name="dp_type">
+            <enum name="ALL" value="1"/>
+            <enum name="YMDH" value="2"/>
+            <enum name="YMD" value="3"/>
+            <enum name="YM" value="4"/>
+            <enum name="Y" value="5"/>
+            <enum name="HM" value="6"/>
+        </attr>
+        <attr format="color|reference" name="dp_selectColor"/>
+        <attr format="dimension|reference" name="dp_textSize"/>
+    </declare-styleable>
+
+
+</resources>
