@@ -14,18 +14,17 @@
 
 
     <declare-styleable name="DatePicker">
-        <attr format="integer" name="dp_minYear"/>
-        <attr format="integer" name="dp_maxYear"/>
-        <attr format="enum" name="dp_type">
-            <enum name="ALL" value="1"/>
+        <attr name="dp_minYear" format="integer"/>
+        <attr name="dp_maxYear" format="integer"/>
+        <attr name="dp_textColor" format="color|reference"/>
+        <attr name="dp_datePickerType" format="enum">
+            <enum name="YMDHM" value="1"/>
             <enum name="YMDH" value="2"/>
             <enum name="YMD" value="3"/>
             <enum name="YM" value="4"/>
             <enum name="Y" value="5"/>
             <enum name="HM" value="6"/>
         </attr>
-        <attr format="color|reference" name="dp_selectColor"/>
-        <attr format="dimension|reference" name="dp_textSize"/>
     </declare-styleable>
 
 

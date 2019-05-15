@@ -106,7 +106,7 @@ public class WheelView extends View {
     private int mPosition = 0;
     // 自定义属性
     private String mLabel;
-    private boolean mIsCyclic = false;
+    private boolean mIsCyclic;
     private int mColor;
     private int mSelectColor;
     private int mTextSize;
@@ -357,6 +357,11 @@ public class WheelView extends View {
         this.mIsCyclic = isCyclic;
         invalidate();
         invalidateLayouts();
+    }
+
+    public void setColor(int color) {
+        mColor = color;
+        invalidate();
     }
 
     public void setSelectColor(int selectColor) {

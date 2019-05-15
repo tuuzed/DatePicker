@@ -1,6 +1,8 @@
 package com.tuuzed.androidx.datepicker.internal;
 
 import android.content.Context;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 
 import java.util.Calendar;
 
@@ -52,5 +54,14 @@ public final class Utils {
         return calendar.getActualMaximum(Calendar.DATE);
     }
 
+
+    @ColorInt
+    public static int getAlphaColor(@ColorInt int color, @IntRange(from = 0, to = 255) int alpha) {
+        int r = ((color >> 16) & 0xff);
+        int g = ((color >> 8) & 0xff);
+        int b = ((color) & 0xff);
+        int a = ((color >> 24) & 0xff);
+        return (alpha << 24) | (r << 16) | (g << 8) | b;
+    }
 }
 

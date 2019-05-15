@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @SuppressLint("ShiftFlags")
 @IntDef(flag = true, value = {
-        DatePickerType.TYPE_ALL,
+        DatePickerType.TYPE_YMDHM,
         DatePickerType.TYPE_YMDH,
         DatePickerType.TYPE_YMD,
         DatePickerType.TYPE_YM,
@@ -18,7 +18,7 @@ import java.lang.annotation.RetentionPolicy;
 })
 @Retention(RetentionPolicy.SOURCE)
 public @interface DatePickerType {
-    int TYPE_ALL = 1;
+    int TYPE_YMDHM = 1;
     int TYPE_YMDH = 2;
     int TYPE_YMD = 3;
     int TYPE_YM = 4;

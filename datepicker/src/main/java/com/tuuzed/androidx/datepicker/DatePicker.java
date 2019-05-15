@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.tuuzed.androidx.datepicker.internal.NumericWheelAdapter;
@@ -35,9 +36,8 @@ public class DatePicker extends FrameLayout {
     // 自定义属性
     private int mMinYear;
     private int mMaxYear;
-    private int mType;
-    private int mSelectColor = Color.BLACK;
-    private int mTextSize;
+    private int mDatePickerType;
+    private int mTextColor = Color.BLACK;
 
     public DatePicker(Context context) {
         this(context, null);
@@ -58,12 +58,12 @@ public class DatePicker extends FrameLayout {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DatePicker);
         mMinYear = a.getInteger(R.styleable.DatePicker_dp_minYear, 1970);
         mMaxYear = a.getInteger(R.styleable.DatePicker_dp_maxYear, 2100);
-        mType = a.getInteger(R.styleable.DatePicker_dp_type, DatePickerType.TYPE_ALL);
-        mSelectColor = a.getColor(R.styleable.DatePicker_dp_selectColor, Color.BLACK);
-        mTextSize = (int) a.getDimension(R.styleable.DatePicker_dp_textSize, Utils.sp2px(context, 14));
+        mDatePickerType = a.getInteger(R.styleable.DatePicker_dp_datePickerType, DatePickerType.TYPE_YMDHM);
+        mTextColor = a.getColor(R.styleable.DatePicker_dp_textColor, Color.BLACK);
         a.recycle();
 
         inflate(context, R.layout.widget_datepicker, this);
+
         mWvYear = findViewById(R.id.wv_year);
         mWvMonth = findViewById(R.id.wv_month);
         mWvDay = findViewById(R.id.wv_day);
@@ -78,65 +78,95 @@ public class DatePicker extends FrameLayout {
 
         // 年
         mWvYear.setCyclic(false);
-        mWvYear.setSelectColor(mSelectColor);
-        mWvYear.setTextSize(mTextSize);
-        mWvYear.addChangingListener((wheel, oldValue, newValue) -> {
-            notifyDayAdapterChange();
-            mCalendar.set(Calendar.YEAR, getYear());
-            if (mOnDateChangedListener != null) {
-                mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+        mWvYear.addChangingListener(new WheelView.OnWheelChangedListener() {
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                notifyDayAdapterChange();
+                mCalendar.set(Calendar.YEAR, getYear());
+                if (mOnDateChangedListener != null) {
+                    mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+                }
             }
         });
         mWvYear.setAdapter(new NumericWheelAdapter(mMinYear, mMaxYear));
         // 月
         mWvMonth.setCyclic(true);
-        mWvMonth.setSelectColor(mSelectColor);
-        mWvMonth.setTextSize(mTextSize);
-        mWvMonth.addChangingListener((wheel, oldValue, newValue) -> {
-            notifyDayAdapterChange();
-            mCalendar.set(Calendar.MONTH, getMonth() - 1);
-            if (mOnDateChangedListener != null) {
-                mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+        mWvMonth.addChangingListener(new WheelView.OnWheelChangedListener() {
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                notifyDayAdapterChange();
+                mCalendar.set(Calendar.MONTH, getMonth() - 1);
+                if (mOnDateChangedListener != null) {
+                    mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+                }
             }
         });
         mWvMonth.setAdapter(new NumericWheelAdapter(1, 12));
         // 日
         mWvDay.setCyclic(true);
-        mWvDay.setSelectColor(mSelectColor);
-        mWvDay.setTextSize(mTextSize);
-        mWvDay.addChangingListener((wheel, oldValue, newValue) -> {
-            mCalendar.set(Calendar.DATE, getDay());
-            if (mOnDateChangedListener != null) {
-                mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+        mWvDay.addChangingListener(new WheelView.OnWheelChangedListener() {
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                mCalendar.set(Calendar.DATE, getDay());
+                if (mOnDateChangedListener != null) {
+                    mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+                }
             }
         });
         // 时
         mWvHour.setAdapter(new NumericWheelAdapter(0, 23));
         mWvHour.setCyclic(true);
-        mWvHour.setSelectColor(mSelectColor);
-        mWvHour.setTextSize(mTextSize);
-        mWvHour.addChangingListener((wheel, oldValue, newValue) -> {
-            mCalendar.set(Calendar.HOUR_OF_DAY, getHour());
-            if (mOnDateChangedListener != null) {
-                mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+        mWvHour.addChangingListener(new WheelView.OnWheelChangedListener() {
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                mCalendar.set(Calendar.HOUR_OF_DAY, getHour());
+                if (mOnDateChangedListener != null) {
+                    mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+                }
             }
         });
+
         mWvDay.setAdapter(new NumericWheelAdapter(1, Utils.getLastDayByYearMonth(getYear(), getMonth())));
         // 分
         mWvMinute.setCyclic(true);
-        mWvMinute.setSelectColor(mSelectColor);
-        mWvMinute.setTextSize(mTextSize);
-        mWvMinute.addChangingListener((wheel, oldValue, newValue) -> {
-            mCalendar.set(Calendar.MINUTE, getMinute());
-            if (mOnDateChangedListener != null) {
-                mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+        mWvMinute.addChangingListener(new WheelView.OnWheelChangedListener() {
+            @Override
+            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+                mCalendar.set(Calendar.MINUTE, getMinute());
+                if (mOnDateChangedListener != null) {
+                    mOnDateChangedListener.onDateChanged(mCalendar.getTime());
+                }
             }
         });
         mWvMinute.setAdapter(new NumericWheelAdapter(0, 59));
 
+        setTextColor(mTextColor);
         // 设置日期
         setDate(new Date());
-        setType(mType);
+        setDatePickerType(mDatePickerType);
+    }
+
+
+    public void setTextColor(@ColorInt int color) {
+        mTextColor = color;
+        int alphaColor = Utils.getAlphaColor(color, 0x50);
+        mWvYear.setColor(alphaColor);
+        mWvMonth.setColor(alphaColor);
+        mWvDay.setColor(alphaColor);
+        mWvHour.setColor(alphaColor);
+        mWvMinute.setColor(alphaColor);
+
+        mWvYear.setSelectColor(color);
+        mWvMonth.setSelectColor(color);
+        mWvDay.setSelectColor(color);
+        mWvHour.setSelectColor(color);
+        mWvMinute.setSelectColor(color);
+
+        mTvYear.setTextColor(alphaColor);
+        mTvMonth.setTextColor(alphaColor);
+        mTvDay.setTextColor(alphaColor);
+        mTvHour.setTextColor(alphaColor);
+        mTvMinute.setTextColor(alphaColor);
     }
 
     public void setMaxYear(int maxYear) {
@@ -151,9 +181,9 @@ public class DatePicker extends FrameLayout {
         notifyDayAdapterChange();
     }
 
-    public void setType(@DatePickerType int type) {
+    public void setDatePickerType(@DatePickerType int type) {
         switch (type) {
-            case DatePickerType.TYPE_ALL:
+            case DatePickerType.TYPE_YMDHM:
                 mWvYear.setVisibility(VISIBLE);
                 mWvMonth.setVisibility(VISIBLE);
                 mWvDay.setVisibility(VISIBLE);
@@ -235,8 +265,8 @@ public class DatePicker extends FrameLayout {
     }
 
     @DatePickerType
-    public int getType() {
-        return mType;
+    public int getDatePickerType() {
+        return mDatePickerType;
     }
 
     public void setDate(@NonNull Date date) {
@@ -290,7 +320,6 @@ public class DatePicker extends FrameLayout {
         mWvMinute.setPosition(minute);
         notifyDayAdapterChange();
     }
-
 
     private void notifyDayAdapterChange() {
         int itemsCount = mWvDay.getAdapter().getItemsCount();
