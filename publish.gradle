@@ -1,24 +1,57 @@
-apply plugin: 'maven'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
-def pomMetadata = [
-        'groupId'   : project.group ?: rootProject.group,
-        'artifactId': project.name,
-        'version'   : project.version ?: rootProject.version,
-        'desc'      : 'Android DatePicker',
-        'website'   : 'https://github.com/tuuzed/DatePicker'
-]
+def group = project.group ?: rootProject.group
+def version = project.version ?: rootProject.version
 
-/**
- * maven plugin
- */
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.groupId = pomMetadata.groupId
-            pom.artifactId = pomMetadata.artifactId
-            pom.version = pomMetadata.version
-            repository(url: "file:///" + rootProject.file(".repo").absolutePath)
+def siteUrl = "https://github.com/tuuzed/DatePicker"
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_API_KEY')
+
+    configurations = ['archives'] //When uploading configuration files
+    pkg {
+        repo = 'maven'
+        name = "$group:${project.name}"
+        desc = 'Android DatePicker Widget'
+        websiteUrl = siteUrl
+        issueTrackerUrl = "$siteUrl/issues"
+        vcsUrl = "${siteUrl}.git"
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'datepicker']
+        publicDownloadNumbers = true
+        dryRun = false
+        override = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'Android DatePicker Widget'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'TuuZed'
+                        name 'TuuZed'
+                        email 'liuyonghui.job@gmail.com'
+                    }
+                }
+                scm {
+                    connection "${siteUrl}.git"
+                    developerConnection "${siteUrl}.git"
+                    url siteUrl
+                }
+            }
         }
     }
 }
@@ -28,24 +61,18 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-artifacts {
-    archives sourcesJar
-}
+//task javadoc(type: Javadoc) {
+//    options.encoding = "UTF-8"
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
 
-/**
- * bintray-release plugin
- */
-publish {
-    bintrayUser = System.getenv('BINTRAY_USER')
-    bintrayKey = System.getenv('BINTRAY_API_KEY')
-    userOrg = 'tuuzed'
-    repoName = 'maven'
-    uploadName = "${pomMetadata.groupId}:${pomMetadata.artifactId}"
-    dryRun = false
-    override = true
-    groupId = pomMetadata.groupId
-    artifactId = pomMetadata.artifactId
-    publishVersion = pomMetadata.version
-    desc = pomMetadata.desc
-    website = pomMetadata.website
+artifacts {
+    // archives javadocJar
+    archives sourcesJar
 }

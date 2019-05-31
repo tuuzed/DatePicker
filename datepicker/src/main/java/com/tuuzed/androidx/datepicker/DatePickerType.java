@@ -6,6 +6,7 @@ import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.text.DateFormat;
 
 @SuppressLint("ShiftFlags")
 @IntDef(flag = true, value = {

@@ -1,15 +1,14 @@
 package com.tuuzed.androidx.datepicker.sample
 
-import android.graphics.Color
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.google.android.material.snackbar.Snackbar
 import com.tuuzed.androidx.datepicker.DatePicker
-
+import com.tuuzed.androidx.datepicker.DatePickerType
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -26,7 +25,8 @@ class MainActivity : AppCompatActivity() {
                 customView(view = datePicker)
                 negativeButton { }
                 positiveButton {
-                    Snackbar.make(view, "${datePicker.date}", Snackbar.LENGTH_SHORT).show()
+                    val dateFormat = DatePicker.getDateFormat(DatePickerType.TYPE_YMDHM)
+                    Snackbar.make(view, dateFormat.format(datePicker.date), Snackbar.LENGTH_SHORT).show()
                 }
             }
         }

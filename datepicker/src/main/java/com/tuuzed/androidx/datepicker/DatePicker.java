@@ -13,10 +13,33 @@ import com.tuuzed.androidx.datepicker.internal.NumericWheelAdapter;
 import com.tuuzed.androidx.datepicker.internal.Utils;
 import com.tuuzed.androidx.datepicker.internal.WheelView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DatePicker extends FrameLayout {
+
+    @NonNull
+    public static DateFormat getDateFormat(@DatePickerType int type) {
+        switch (type) {
+            case DatePickerType.TYPE_HM:
+                return new SimpleDateFormat("hh:mm", Locale.getDefault());
+            case DatePickerType.TYPE_YMDHM:
+                return new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
+            case DatePickerType.TYPE_YMDH:
+                return new SimpleDateFormat("yyyy-MM-dd hh", Locale.getDefault());
+            case DatePickerType.TYPE_YMD:
+                return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            case DatePickerType.TYPE_YM:
+                return new SimpleDateFormat("yyyy-MM", Locale.getDefault());
+            case DatePickerType.TYPE_Y:
+                return new SimpleDateFormat("yyyy", Locale.getDefault());
+            default:
+                return new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
+        }
+    }
 
     private WheelView mWvYear;
     private WheelView mWvMonth;
@@ -30,8 +53,8 @@ public class DatePicker extends FrameLayout {
     private TextView mTvMinute;
     @Nullable
     private OnDateChangedListener mOnDateChangedListener;
-
     private Calendar mCalendar;
+
 
     // 自定义属性
     private int mMinYear;
