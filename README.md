@@ -1,8 +1,7 @@
 # DatePicker
 
 
-[ ![Download](https://api.bintray.com/packages/tuuzed/maven/datepicker/images/download.svg) ](https://bintray.com/tuuzed/maven/datepicker/_latestVersion)
-
+[ ![Download](https://api.bintray.com/packages/tuuzed/maven/com.tuuzed.androidx.datepicker%3Adatepicker/images/download.svg) ](https://bintray.com/tuuzed/maven/com.tuuzed.androidx.datepicker%3Adatepicker/_latestVersion)
 
 #### 添加依赖
 
