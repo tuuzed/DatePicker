@@ -205,6 +205,7 @@ public class DatePicker extends FrameLayout {
     }
 
     public void setDatePickerType(@DatePickerType int type) {
+        mDatePickerType = type;
         switch (type) {
             case DatePickerType.TYPE_YMDHM:
                 mWvYear.setVisibility(VISIBLE);
