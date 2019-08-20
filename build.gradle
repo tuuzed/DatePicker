@@ -30,7 +30,7 @@ allprojects {
     }
 }
 
-group = 'com.tuuzed.androidx.datepicker'
+group = 'com.tuuzed.datepicker'
 version = '1.1.0'
 
 task clean(type: Delete) {
