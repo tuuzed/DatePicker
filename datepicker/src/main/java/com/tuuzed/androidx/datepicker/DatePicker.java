@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.tuuzed.androidx.datepicker.internal.NumericWheelAdapter;
 import com.tuuzed.androidx.datepicker.internal.Utils;
 import com.tuuzed.androidx.datepicker.internal.WheelView;
@@ -27,9 +29,9 @@ public class DatePicker extends FrameLayout {
             case DatePickerType.TYPE_HM:
                 return new SimpleDateFormat("hh:mm", Locale.getDefault());
             case DatePickerType.TYPE_YMDHM:
-                return new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
+                return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
             case DatePickerType.TYPE_YMDH:
-                return new SimpleDateFormat("yyyy-MM-dd hh", Locale.getDefault());
+                return new SimpleDateFormat("yyyy-MM-dd HH", Locale.getDefault());
             case DatePickerType.TYPE_YMD:
                 return new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             case DatePickerType.TYPE_YM:
@@ -37,7 +39,7 @@ public class DatePicker extends FrameLayout {
             case DatePickerType.TYPE_Y:
                 return new SimpleDateFormat("yyyy", Locale.getDefault());
             default:
-                return new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault());
+                return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         }
     }
 
